@@ -1,0 +1,63 @@
+import os
+import shutil
+import urllib
+from os import system
+
+
+def Git_Repo(file):
+    # downlaod gitpython
+    try:
+        os.system("pip3 install GitPython")
+        import git
+        print("Downloaded GitPython with pip3")
+    except:
+        try:
+            os.system("pip install GitPython")
+            import git
+            print("Downloaded GitPython with pip")
+        except:
+            print("Error downloading GitPython... try downloading with your command-line. ")
+    # clone git repo
+    os.system("cd ..") 
+    python_dir = os.getcwd() 
+    print(python_dir)
+    # moves into python dir
+    contents = open("File List.yaml", "w+")
+    try:
+        git.Repo.clone_from(file, python_dir + "/pyrepo")
+    except:
+        print("Did not download git repo")
+    # get cwd, cd into Python
+    try:
+        os.chdir("pyrepo")
+        print(os.getcwd())
+    except:
+        print("Error changing into PyRepo")
+    # delete git temp
+    #try:
+     #   os.system("rm -rf .git")
+      #  print(".git has been temporarily deleted. ")
+    #except:
+     #   print("Error deleting .git")
+
+    # create the tags file
+    try:
+        system("ctags -R")
+        print('tags file created successfully')
+        contents.write("tags file was created successfully. \n")
+    except:
+        print("There was an error with ctags")
+        try:
+            print('Enter password to download ctags' + system("sudo"))
+            system("")
+        except:
+            print("nothing worked")
+
+
+    # os walk
+    # write to contents file
+    # remove pyrepo clone
+
+
+
+Git_Repo('https://github.com/ridgenw/ProfileCarousel.git')

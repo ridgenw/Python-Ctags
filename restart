@@ -1,0 +1,17 @@
+import shutil
+import os
+
+
+def delete(path):
+    try:
+        print(os.getcwd())
+        path2 = (path + "/pyrepo")
+        shutil.rmtree(path2)
+        #os.system("rm -rf " + path2)
+        os.system('rm "File List.yaml"')
+    except OSError as e:
+        print(e.strerror)
+        print("no")
+
+
+delete("/Users/ridgewilliams/Developer/VSCode/Python")
