@@ -10,15 +10,9 @@ def Git_Repo(file):
         if "ctags" in files == False: #can find universal ctags downlaoded on device
              system("git clone https://github.com/universal-ctags/ctags.git \n cd ctags \n ./autogen.sh \n ./configure \n make \n sudo make install")
         else:
-            print("ctags file was previously found.")
+            print('"ctags" file was previously found.')
             break
            
-        
-        
-
-
-
-
 
     # downlaod gitpython
     try:
@@ -37,17 +31,20 @@ def Git_Repo(file):
     python_dir = os.getcwd() 
     print(python_dir)
     # moves into python dir
-    contents = open("File List.yaml", "w+")
+    #contents = open("File List.yaml", "w+")
     try:
         git.Repo.clone_from(file, python_dir + "/pyrepo")
     except:
         print("Did not download git repo")
     # get cwd, cd into Python
-    try:
-        os.chdir("pyrepo")
-        print(os.getcwd())
-    except:
-        print("Error changing into PyRepo")
+
+   # try:
+    #    os.chdir("pyrepo")
+     #   print(os.getcwd())
+    #except:
+     #   print("Error changing into PyRepo")
+
+
     # delete git temp
     #try:
      #   os.system("rm -rf .git")
@@ -57,14 +54,14 @@ def Git_Repo(file):
 
     # create the tags file
     try:
-        system("uctags -R -f tags .")
+        system("uctags -R -f tags . pyrepo")
         print('tags file created successfully')
-        contents.write("tags file was created successfully. \n")
+        #contents.write("tags file was created successfully. \n")
     except:
         print("There was an error with ctags")
         try:
-            print('Enter password to download ctags' + system("sudo"))
-            system("")
+            print('You might need to check if you have uctags downlaoded')
+            
         except:
             print("nothing worked")
 
@@ -75,4 +72,4 @@ def Git_Repo(file):
 
 
 
-Git_Repo('https://github.com/ridgenw/ProfileCarousel.git')
+Git_Repo('')

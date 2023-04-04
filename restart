@@ -4,14 +4,21 @@ import os
 
 def delete(path):
     try:
-        print(os.getcwd())
         path2 = (path + "/pyrepo")
-        shutil.rmtree(path2)
-        #os.system("rm -rf " + path2)
-        os.system('rm "File List.yaml"')
+        try:
+            shutil.rmtree(path2)
+        except:
+            print(os.getcwd())
+        try:
+            os.system('rm tags')
+        except:
+            print("Removing tags file could not be done.")
+        try:
+            shutil.rmtree(path + "/ctags")
+        except:
+            return
     except OSError as e:
         print(e.strerror)
-        print("no")
 
 
 delete("/Users/ridgewilliams/Developer/VSCode/Python")
