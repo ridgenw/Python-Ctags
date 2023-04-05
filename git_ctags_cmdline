@@ -7,6 +7,7 @@
 import os
 import shutil
 from os import system
+import git
 
 # FILE TYPES THAT WILL RUN AS LONG AS SUPPORTED
 file_types = [".swift", ".py"]
@@ -15,33 +16,6 @@ URL = input("Paste or type GitHub URL: ")
 def Git_Repo(url, cleanup = False):
 # POTENTIONAL SETUP
 
-    for root, dir, files2 in os.walk("/Library"):
-        if "GitPython" in files2 == False:
-            try:
-                os.system("pip3 install GitPython")
-                import git
-                print("Downloaded GitPython with pip3")
-            except:
-                try:
-                    os.system("pip install GitPython")
-                    import git
-                    print("Downloaded GitPython with pip")
-                except:
-                    print("Error downloading GitPython... try downloading with your command-line. ")
-        else:
-            import git
-            print('GitPython is already downloaded')
-            break
-
-    for root, dir, files1 in os.walk("/usr/local"):
-        if "universal-ctags" in files1 == False: #can find universal ctags downlaoded on device
-            try:
-                system("git clone https://github.com/universal-ctags/ctags.git \n cd ctags \n ./autogen.sh \n ./configure \n make \n sudo make install")
-            except:
-                print("There was an error downloading universal ctags from GitHub.")
-        else:
-            print('"ctags" file was previously found.')
-            break
            
 # ACTION STARTS -------------------------
     
