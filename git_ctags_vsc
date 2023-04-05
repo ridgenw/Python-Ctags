@@ -9,7 +9,7 @@ import shutil
 from os import system
 
 # FILE TYPES THAT WILL RUN AS LONG AS SUPPORTED
-file_types = [".swift", ".py"]
+file_types = ['.py', '.sv', '.v']
 
 def Git_Repo(url, cleanup = False):
 # POTENTIONAL SETUP
@@ -70,14 +70,14 @@ def Git_Repo(url, cleanup = False):
             if system_file.endswith(tuple(file_types)):
                 try:
                     shutil.move(os.path.join(root + "/" + str(system_file)), os.path.join(python_dir + "/project_files"))
-                    print("Added files to pyrepo file")
+                    print("Added source file.")
                 except:
                     print("Could not move files")
 
     # creates the Universal ctags indexed file within your current directory
     try:
-        system("uctags -R -f tags . project_files")            
-        print('Utags file created successfully')
+        system("uctags -R -f .tags project_files")            
+        print('tags file created successfully')
     except:
         print("There was an error with ctags")
 
@@ -96,4 +96,4 @@ def Git_Repo(url, cleanup = False):
 
 
 
-Git_Repo('https://github.com/joblib/joblib.git', True)
+Git_Repo('https://github.com/mayurkubavat/UVM-Examples.git')

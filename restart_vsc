@@ -9,7 +9,7 @@ def delete(path):
         except:
             print(os.getcwd())
         try:
-            os.remove('tags')
+            os.remove('.tags')
         except:
             print("Removing tags file could not be done.")
         try:
