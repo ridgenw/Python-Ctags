@@ -4,19 +4,18 @@ import os
 
 def delete(path):
     try:
-        path2 = (path + "/pyrepo")
         try:
-            shutil.rmtree(path2)
+            shutil.rmtree(path + "/pyrepo")
         except:
             print(os.getcwd())
         try:
-            os.system('rm tags')
+            os.remove('tags')
         except:
             print("Removing tags file could not be done.")
         try:
-            shutil.rmtree(path + "/ctags")
+            shutil.rmtree(path + "/project_files")
         except:
-            return
+            print("Couldn't remove the pyrepo_files")
     except OSError as e:
         print(e.strerror)
 
