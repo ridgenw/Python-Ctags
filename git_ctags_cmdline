@@ -10,7 +10,7 @@ from os import system
 import git
 
 # FILE TYPES THAT WILL RUN AS LONG AS SUPPORTED
-file_types = [".swift", ".py"]
+file_types = [".py", ".v", ".vhd", ".sv"]
 
 URL = input("Paste or type GitHub URL: ")
 

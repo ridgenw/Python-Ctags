@@ -9,10 +9,6 @@ def delete(path):
         except:
             print(os.getcwd())
         try:
-            os.remove('.tags')
-        except:
-            print("Removing tags file could not be done.")
-        try:
             shutil.rmtree(path + "/project_files")
         except:
             print("Couldn't remove the pyrepo_files")
@@ -20,4 +16,4 @@ def delete(path):
         print(e.strerror)
 
 
-delete("/Users/ridgewilliams/Developer/VSCode/Python")
+delete("")
