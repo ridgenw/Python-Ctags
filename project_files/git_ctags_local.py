@@ -10,7 +10,7 @@ import shutil
 from os import system
 
 # FILE TYPES THAT WILL RUN AS LONG AS SUPPORTED
-file_types = ['.py', '.sv', '.v', '.vhd']
+file_types = ['.py', '.sv', '.v', '.vhd', '.dart']
 
 repo_path = input("Enter the path for your repository: ")
 
@@ -39,8 +39,10 @@ def Git_Repo(path, cleanup = False):
     for root, dir, system_files in os.walk(current_dir):
         for system_file in system_files:
             if system_file.endswith(tuple(file_types)):
+                original = os.path.join(root + "/" + str(system_file))                
+                target = os.path.join(current_dir + "/project_files/" + str(system_file))
                 try:
-                    shutil.move(os.path.join(root + "/" + str(system_file)), os.path.join(current_dir + "/project_files"))
+                    shutil.copyfile(original, target)
                     print("Added source file.")
                 except:
                     print("Could not move file")

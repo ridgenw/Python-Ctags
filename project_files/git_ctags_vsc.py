@@ -68,11 +68,13 @@ def Git_Repo(url, cleanup = False):
     for root, dir, system_files in os.walk(pyrepo_dir):
         for system_file in system_files:
             if system_file.endswith(tuple(file_types)):
+                original = os.path.join(root + "/" + str(system_file))                
+                target = os.path.join(python_dir + "/project_files/" + str(system_file))
                 try:
-                    shutil.move(os.path.join(root + "/" + str(system_file)), os.path.join(python_dir + "/project_files"))
+                    shutil.copyfile(original, target)
                     print("Added source file.")
                 except:
-                    print("Could not move files")
+                    print("Could not move file")
 
     # creates the Universal ctags indexed file within your current directory
     try:
