@@ -16,4 +16,4 @@ def delete(path):
         print(e.strerror)
 
 
-delete("")
+delete("/Users/ridgewilliams/Developer/VSCode/Python")
