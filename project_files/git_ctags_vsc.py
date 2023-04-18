@@ -9,7 +9,7 @@ import shutil
 from os import system
 
 # FILE TYPES THAT WILL RUN AS LONG AS SUPPORTED
-file_types = ['.py', '.sv', '.v', '.vhd']
+file_types = ['.sv', '.v', '.vhd']
 
 def Git_Repo(url, cleanup = False):
 # POTENTIONAL SETUP
