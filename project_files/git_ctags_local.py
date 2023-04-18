@@ -6,34 +6,33 @@
 
 import os
 import git
-import shutil
 from os import system
 
 # FILE TYPES THAT WILL RUN AS LONG AS SUPPORTED
 file_types = ['.v', '.sv', '.vhd']
 
+# USER INPUTS
 repo_path = input("Enter the path to your repository: ")
 removeFile= input("Would you like to keep a copy of all indexed files? y/n: ")
 
 def Git_Repo(path, removeFile):
-# POTENTIONAL SETUP
+# TELLS USER THE PATH
     print(path + " is your path. ")
 # ACTION STARTS -------------------------
     
-    # get current directory
+    # GET THE CURRENT DIRECTORY
     os.chdir(path)
     current_dir = os.getcwd() 
+    
+    # CREATES THE FILE THAT HOLDS ALL FILE PATHS TO BE INDEXED LATER
     list_source_files = open("files", "a+")
 
-    # clones git repo for use
     try:
         git.Repo(path)
     except:
         print("Did not download git repo")
 
-    # makes project_files directory
-
-    # moves files with correct postfix to project_files    
+    # MOVES FILES WITH THE CORRECT POSTFIX TO THE FILE
     for root, dir, system_files in os.walk(current_dir):
         for system_file in system_files:
             if system_file.endswith(tuple(file_types)):
@@ -44,8 +43,7 @@ def Git_Repo(path, removeFile):
                 except:
                     print("Could not move file")
 
-    # creates the Universal ctags indexed file within your current directory
-    list_source_files.close()
+    # CREATES THE UNIVERSAL CTAGS INDEXED FILE WITHIN YOUR CURRENT DIRECTORY
     try:
         system("uctags -L files -f .tags")            
     except:
@@ -56,6 +54,3 @@ def Git_Repo(path, removeFile):
     
 
 Git_Repo(repo_path, removeFile)
-
-# open a new file that holds the complete paths of all allowed files, 
-# then run ctags on that file to preserve locations.

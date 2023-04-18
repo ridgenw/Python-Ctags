@@ -48,6 +48,7 @@ def Git_Repo(url, cleanup = False):
     os.system("cd ..") 
     python_dir = os.getcwd() 
     print(python_dir + " is the current directory here")
+    list_source_files = open("files", "a+")
 
     # clones git repo for use
     try:
@@ -55,46 +56,25 @@ def Git_Repo(url, cleanup = False):
     except:
         print("Did not download git repo")
 
-    # makes project_files directory
-    try:
-        os.mkdir(python_dir + "/project_files")
-        print("directory made")
-    except:
-        print('Pyrepo file is already created.')
-
     pyrepo_dir = python_dir + "/pyrepo"
 
     # moves files with correct postfix to project_files    
     for root, dir, system_files in os.walk(pyrepo_dir):
         for system_file in system_files:
             if system_file.endswith(tuple(file_types)):
-                original = os.path.join(root + "/" + str(system_file))                
-                target = os.path.join(python_dir + "/project_files/" + str(system_file))
-                try:
-                    shutil.copyfile(original, target)
+                original = os.path.join(root + "/" + str(system_file))                                
+                try: 
+                    list_source_files.write('{0}\n'.format(original))
                     print("Added source file.")
                 except:
                     print("Could not move file")
 
     # creates the Universal ctags indexed file within your current directory
+    list_source_files.close()
     try:
-        system("uctags -R -f .tags project_files")            
-        print('tags file created successfully')
+        system("uctags -L files -f .tags")            
     except:
-        print("There was an error with ctags")
-
-    # optionally removes the old git clone
-    if cleanup == True:
-        path = python_dir
-        try:
-            shutil.rmtree(path + "/pyrepo")
-        except:
-            print(os.getcwd())
-
-        try:
-            shutil.rmtree(path + "/project_files")
-        except:
-            print("Couldn't remove the pyrepo_files")
+       print("There was an error with ctags")
 
 
 

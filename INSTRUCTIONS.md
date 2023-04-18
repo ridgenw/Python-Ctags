@@ -1,4 +1,4 @@
-These programs take a git repository and generate an indexed universal ctags file, considering the source files are written in a language supported by universal ctags. It will also create a new folder called "project_files" that contains all files that ctags actually indexed. These should be all your source files. You will find all programs in the "project_files" folder.
+These programs take a git repository and generate an indexed universal ctags file, considering the source files are written in a language supported by universal ctags. It will also create a file called "files" that contains all files that ctags actually indexed. These should be all your source files. You will find all Python programs in the "project_files" folder.
 
 # GIT_CTAGS_CMDLINE ==>
 You can forget about this file for now, it is not important
