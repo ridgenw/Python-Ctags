@@ -13,9 +13,8 @@ file_types = ['.v', '.sv', '.vhd']
 
 # USER INPUTS
 repo_path = input("Enter the path to your repository: ")
-removeFile= input("Would you like to keep a copy of all indexed files? y/n: ")
 
-def Git_Repo(path, removeFile):
+def Git_Repo(path):
 # TELLS USER THE PATH
     print(path + " is your path. ")
 # ACTION STARTS -------------------------
@@ -23,14 +22,10 @@ def Git_Repo(path, removeFile):
     # GET THE CURRENT DIRECTORY
     os.chdir(path)
     current_dir = os.getcwd() 
+    print(current_dir)
     
     # CREATES THE FILE THAT HOLDS ALL FILE PATHS TO BE INDEXED LATER
-    list_source_files = open("files", "a+")
-
-    try:
-        git.Repo(path)
-    except:
-        print("Did not download git repo")
+    list_source_files = open("files.txt", "a+")
 
     # MOVES FILES WITH THE CORRECT POSTFIX TO THE FILE
     for root, dir, system_files in os.walk(current_dir):
@@ -39,18 +34,16 @@ def Git_Repo(path, removeFile):
                 original = os.path.join(root + "/" + str(system_file))                                
                 try: 
                     list_source_files.write('{0}\n'.format(original))
+                    #copy_file.write('{0}/n'.format(original))
                     print("Added source file.")
                 except:
                     print("Could not move file")
+    list_source_files.close()
 
     # CREATES THE UNIVERSAL CTAGS INDEXED FILE WITHIN YOUR CURRENT DIRECTORY
     try:
-        system("uctags -L files -f .tags")            
+        system("uctags -L files.txt -f .tags")            
     except:
        print("There was an error with ctags")
 
-    if removeFile == "n" or "N":
-        os.remove("files")
-    
-
-Git_Repo(repo_path, removeFile)
+Git_Repo(repo_path)
